@@ -1,0 +1,33 @@
+﻿<Window x:Class="WebImageDownloader.AddItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AddItem" Height="181.6" Width="587.2" Icon="Images/Button-Add.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="240*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="35*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <Label Content="URL:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,0,480.2,0.2" Grid.RowSpan="2"/>
+        <!--<Label Content="General down:" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" />-->
+        <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0.4,0.2,11.6" Grid.RowSpan="2">
+            <Button Content="OK" Width="80" Click="Button_Click_1"></Button>
+            <Grid Width="10"></Grid>
+            <Button Content="Cancel" Width="80" Click="Button_Click"></Button>
+        </StackPanel>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="textBox_URL"  />
+        <CheckBox Grid.Column="1" Grid.Row="3" Name="general_check" IsChecked="False" VerticalAlignment="Center" Content="General Download" ></CheckBox>
+        <ProgressBar Name="Running" Grid.Row="5" Grid.Column="1" Width="400" Height="20" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>

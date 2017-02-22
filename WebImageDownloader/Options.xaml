@@ -1,0 +1,40 @@
+﻿<Window x:Class="WebImageDownloader.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Options" Height="220" Width="368.41" Icon="Images/Button-Options.ico">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="267*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="36*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="38*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Save Path:" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,0.4,267,0" Width="64" />
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Horizontal" Margin="0.2,0.4,0,0">
+            <TextBox Name="textBox_savePath" Width="200"/>
+            <Grid Width="16"></Grid>
+            <Button Content="..." Width="50" Name="button_OptionsBrower" Click="button_OptionsBrower_Click"/>
+        </StackPanel>
+        <Label Content="Save Name:" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Grid.ColumnSpan="2" Margin="0,7,267,6.8" Grid.RowSpan="3" Width="72" />
+        <TextBox Name="textBox_saveName" Grid.Column="1" Grid.Row="2" Margin="0.2,7,0,6.8" Grid.RowSpan="3" />
+
+        <StackPanel Grid.Column="1" Grid.Row="9" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0.4,0,7" Grid.RowSpan="2" Width="175">
+            <Button Content="OK" Width="80" Name="button_OKOptions" Click="button_OKOptions_Click"/>
+            <Grid Width="15"/>
+            <Button Content="Cancel" Width="80" Name="button_CancelOptions" Click="button_CancelOptions_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

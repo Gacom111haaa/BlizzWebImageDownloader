@@ -1,0 +1,56 @@
+﻿<Window x:Class="WebImageDownloader.ChapToVol"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ChapToVol" Height="266" Width="380" Icon="Images/Button-pdf.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="26*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="1" >
+            <Label Content="Đường dẫn vào" Width="100"/>
+            <TextBox HorizontalAlignment="Left"  TextWrapping="Wrap" Text=""  Name="textBoxInput" Width="200"/>
+            <Grid Width="10"/>
+            <Button Content="..." Width="40" Name="button_Input" Click="button_Input_Click"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" >
+            <Label Content="Số chap một vol" HorizontalAlignment="Left"  Width="100" />
+            <TextBox HorizontalAlignment="Left" Text="" Width="250" Name="textBoxNumberChap" IsEnabled="False"  />
+        </StackPanel>
+
+        <StackPanel Grid.Row="5" Orientation="Horizontal">
+            <Label Content="Chap bắt đầu" HorizontalAlignment="Left"  Width="100" Grid.Row="6"/>
+            <TextBox HorizontalAlignment="Left" Width="250" Name="textBoxChapStart" IsEnabled="False" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="7" Orientation="Horizontal" >
+            <Label Content="Tên truyện" HorizontalAlignment="Left"  Width="100" Grid.Row="6"/>
+            <TextBox HorizontalAlignment="Left" Width="250"  IsEnabled="False" Name="textBoxName"/>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Left" Grid.Row="9" Orientation="Horizontal" >
+            <Label Content="Đường dẫn ra" HorizontalAlignment="Left" Width="100"/>
+            <TextBox TextWrapping="Wrap" Text="" Name="textBoxOutput" Width="200"/>
+            <Grid Width="10"/>
+            <Button Content="..." Width="40" Name="button_Output" Click="button_Output_Click"/>
+        </StackPanel>
+
+        <ProgressBar Maximum="100" Height="10"  Width="289" Name="progressBar1" Value="0" Grid.Row="11" HorizontalAlignment="Center"/>
+        <Button Content="Chạy" HorizontalAlignment="Right"  VerticalAlignment="Center" Width="75" Click="Button_Click_1" Grid.Row="13"/>
+
+    </Grid>
+</Window>
