@@ -80,7 +80,7 @@ namespace WebImageDownloader
                        {
                            Running.IsIndeterminate = false;
                            main.AddReturn();
-                           this.Close();                        
+                           this.Close();
                        }, TaskScheduler.FromCurrentSynchronizationContext());
                 }
 
@@ -131,12 +131,14 @@ namespace WebImageDownloader
                            this.Close();
                        }, TaskScheduler.FromCurrentSynchronizationContext());
                 }
-                else // General download
+
+                else if (Address.IndexOf("fuskator.com") > 0) // urlgalleries
                 {
+
                     Task taskCreateList =
                        Task.Factory.StartNew(() =>
                        {
-                           GenaralDownload GD = new GenaralDownload(string1, string2, string3);
+                           fuskator GD = new fuskator(string1, string2, string3);
                            GD.GetImagesLinkFromUrl2();
 
                        }).ContinueWith(ant =>
@@ -146,6 +148,56 @@ namespace WebImageDownloader
                            this.Close();
                        }, TaskScheduler.FromCurrentSynchronizationContext());
                 }
+
+                else if (Address.IndexOf("imagefap.com") > 0) // urlgalleries
+                {
+
+                    Task taskCreateList =
+                       Task.Factory.StartNew(() =>
+                       {
+                           imagefap GD = new imagefap(string1, string2, string3);
+                           GD.GetImagesLinkFromUrl2();
+
+                       }).ContinueWith(ant =>
+                       {
+                           Running.IsIndeterminate = false;
+                           main.AddReturn();
+                           this.Close();
+                       }, TaskScheduler.FromCurrentSynchronizationContext());
+                }
+
+                else if (Address.IndexOf("eroticity.net") > 0) // urlgalleries
+                {
+
+                    Task taskCreateList =
+                       Task.Factory.StartNew(() =>
+                       {
+                           eroticity GD = new eroticity(string1, string2, string3);
+                           GD.GetImagesLinkFromUrl2();
+
+                       }).ContinueWith(ant =>
+                       {
+                           Running.IsIndeterminate = false;
+                           main.AddReturn();
+                           this.Close();
+                       }, TaskScheduler.FromCurrentSynchronizationContext());
+                }
+
+                else // General download
+            {
+                Task taskCreateList =
+                   Task.Factory.StartNew(() =>
+                   {
+                       GenaralDownload GD = new GenaralDownload(string1, string2, string3);
+                       GD.GetImagesLinkFromUrl2();
+
+                   }).ContinueWith(ant =>
+                   {
+                       Running.IsIndeterminate = false;
+                       main.AddReturn();
+                       this.Close();
+                   }, TaskScheduler.FromCurrentSynchronizationContext());
+            }
 
                 
             }

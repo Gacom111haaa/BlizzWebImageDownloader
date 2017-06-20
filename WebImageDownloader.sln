@@ -1,16 +1,24 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebImageDownloader", "WebImageDownloader\WebImageDownloader.csproj", "{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Debug|x64.ActiveCfg = Debug|x64
+		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Debug|x64.Build.0 = Debug|x64
 		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Debug|x86.ActiveCfg = Debug|x86
 		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Debug|x86.Build.0 = Debug|x86
+		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Release|x64.ActiveCfg = Release|x64
+		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Release|x64.Build.0 = Release|x64
 		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Release|x86.ActiveCfg = Release|x86
 		{410DBFEB-EB1C-4B60-9E4B-32E01671E97E}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
@@ -18,13 +26,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		VSCustomBkgrdPaint = False
-		VSUseSystemFonts = False
-		VSSkinToggleButtons = True
-		VSSkinFlatStyles = True
-		VSTextShadow = True
-		VSToolStripStyle = Mixed
-		VSTargetControls = FormsAndControls
 		VSStyle = Office2007 (Black).vssf
+		VSTargetControls = FormsAndControls
+		VSToolStripStyle = Mixed
+		VSTextShadow = True
+		VSSkinFlatStyles = True
+		VSSkinToggleButtons = True
+		VSUseSystemFonts = False
+		VSCustomBkgrdPaint = False
 	EndGlobalSection
 EndGlobal

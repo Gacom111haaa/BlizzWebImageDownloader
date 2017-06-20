@@ -178,9 +178,10 @@ namespace WebImageDownloader
             ButtonAdd.IsEnabled = false;
 
             //Task taskCreateList =
-                    //Task.Factory.StartNew(() =>
-                    //{
-                        StreamReader sr = new StreamReader("data.txt");
+            //Task.Factory.StartNew(() =>
+            //{
+            DataGridListDownload.DataContext = null;
+                StreamReader sr = new StreamReader("data.txt");
                         string input = null;
                         while ((input = sr.ReadLine()) != null)
                         {
