@@ -85,14 +85,16 @@ namespace WebImageDownloader
         private void Delete()
         {
             if (!isRunning)
-            {
-                int StartSelect = DataGridListDownload.SelectedIndex;
-                int RangeSelect = DataGridListDownload.SelectedItems.Count;
-                MainQueueItemDownload.RemoveRange(StartSelect - RangeSelect + 1, RangeSelect);
+            {             
+                List<ItemDown> selectedItems = DataGridListDownload.SelectedItems.OfType<ItemDown>().ToList();
+                foreach (ItemDown item in selectedItems)
+                {
+                    MainQueueItemDownload.Remove(item);
+                }               
                 DataGridListDownload.DataContext = null;
-                DataGridListDownload.DataContext = MainQueueItemDownload;
+                DataGridListDownload.DataContext = MainQueueItemDownload;              
             }
-            else System.Windows.MessageBox.Show("Can't delete when download");
+            else MessageBox.Show("Can't delete when download");
         }
 
         private void Clear()
@@ -100,7 +102,6 @@ namespace WebImageDownloader
             if (!isRunning)
             {
                 DataGridListDownload.DataContext = null;
-                //MainListItemsDownload.Clear();
                 MainQueueItemDownload.Clear();
             }
             else
@@ -211,20 +212,20 @@ namespace WebImageDownloader
             addForm.ShowDialog();
         }
 
-        private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            if(comboBox_SelectDeleteMethod.SelectedIndex==0)
-            {
-                image_Delete_Button.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Images/Button-Delete.ico"));
-                textbox_Delete_Button.Text = "Delete";
-            }
+        //private void ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        //{
+        //    if(comboBox_SelectDeleteMethod.SelectedIndex==0)
+        //    {
+        //        image_Delete_Button.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Images/Button-Delete.ico"));
+        //        textbox_Delete_Button.Text = "Delete";
+        //    }
 
-            else
-            {
-                image_Delete_Button.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Images/Button-DeleteAll2.ico"));
-                textbox_Delete_Button.Text = "Delete All";
-            }
-        }
+        //    else
+        //    {
+        //        image_Delete_Button.Source = new BitmapImage(new Uri(Directory.GetCurrentDirectory() + "/Images/Button-DeleteAll2.ico"));
+        //        textbox_Delete_Button.Text = "Delete All";
+        //    }
+        //}
 
         private void ButtonDown_Click(object sender, RoutedEventArgs e)
         {
@@ -232,16 +233,8 @@ namespace WebImageDownloader
         }
 
         private void ButtonDelete_Click(object sender, RoutedEventArgs e)
-        {
-            if(comboBox_SelectDeleteMethod.SelectedIndex == 0)
-            {
+        {          
                 Delete();
-            }
-
-            else
-            {
-                Clear();
-            }
         }
 
         private void ButtonOptions_Click(object sender, RoutedEventArgs e)
@@ -315,9 +308,13 @@ namespace WebImageDownloader
             myGif.Position = new TimeSpan(0, 0, 1);
             myGif.Play();
         }
+        private void ButtonClear_Click(object sender, RoutedEventArgs e)
+        {
+            Clear();
+        }
 
         #endregion
 
-       
+
     }
 }

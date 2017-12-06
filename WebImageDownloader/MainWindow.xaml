@@ -5,7 +5,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="70*"/>
             <RowDefinition Height="285*"/>
         </Grid.RowDefinitions>
         <Menu IsMainMenu="True" BorderBrush="Gray" BorderThickness="1">
@@ -25,57 +25,63 @@
             <MenuItem Header="About"/>
         </Menu>     
         <StackPanel Orientation="Horizontal" Grid.Row="1" Background="#FFF9F9F9">
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonAdd" Click="ButtonAdd_Click">
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonAdd" Click="ButtonAdd_Click">
                 <StackPanel>
                     <Image Source="Images/Button-Add.ico" Width="40" Height="40"/>
-                    <TextBlock HorizontalAlignment="Center">All URL</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Add</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonDown" Click="ButtonDown_Click">
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonDown" Click="ButtonDown_Click">
                 <StackPanel>
                     <Image Source="Images/Button-Download.ico" Width="40" Height="40"/>
-                    <TextBlock HorizontalAlignment="Center">Download</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Start</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonPause" Click="ButtonPause_Click" >
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonPause" Click="ButtonPause_Click" >
                 <StackPanel>
                     <Image Source="Images/Button-Pause.ico" Width="40" Height="40"/>
-                    <TextBlock HorizontalAlignment="Center">Pause Down</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Pause</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonResume" Click="Run_Gif">
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonResume" Click="Run_Gif">
                 <StackPanel>
                     <Image Source="Images/Button-Resume.ico" Width="40" Height="40"/>
-                    <TextBlock HorizontalAlignment="Center">Resume Down</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Resume</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonDelete" Click="ButtonDelete_Click" >
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonDelete" Click="ButtonDelete_Click" >
                 <StackPanel>
                     <Image Name="image_Delete_Button" Source="Images/Button-Delete.ico" Width="40" Height="40"/>
                     <TextBlock Name="textbox_Delete_Button" HorizontalAlignment="Center">Delete</TextBlock>
                 </StackPanel>
             </Button>
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonClear" Click="ButtonClear_Click" >
+                <StackPanel>
+                    <Image Name="image_Clear_Button" Source="Images/Button-DeleteAll2.ico" Width="40" Height="40"/>
+                    <TextBlock Name="textbox_Clear_Button" HorizontalAlignment="Center">Clear List</TextBlock>
+                </StackPanel>
+            </Button>
             <!--<Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Width="3"></Separator>-->
-            <ComboBox Name="comboBox_SelectDeleteMethod" BorderBrush="#FFF9F9F9" Width="20" SelectedIndex="0" Background="#FFF9F9F9" SelectionChanged="ComboBox_SelectionChanged">               
+            <!--<ComboBox Name="comboBox_SelectDeleteMethod" BorderBrush="#FFF9F9F9" Width="20" SelectedIndex="0" Background="#FFF9F9F9" SelectionChanged="ComboBox_SelectionChanged">               
                 <ComboBoxItem Content="Delete"/>
                 <ComboBoxItem Content="Delete All"/> 
-            </ComboBox>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonOptions" Click="ButtonOptions_Click">
+            </ComboBox>-->
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonOptions" Click="ButtonOptions_Click">
                 <StackPanel>
                     <Image Source="Images/Button-Options.ico" Width="40" Height="40"/>
                     <TextBlock HorizontalAlignment="Center">Options</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonHtml" Click="ButtonHtml_Click" >
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonHtml" Click="ButtonHtml_Click" >
                 <StackPanel>
                     <Image Source="Images/Button-html.ico" Width="40" Height="40"/>
-                    <TextBlock HorizontalAlignment="Center">Html to Image</TextBlock>
+                    <TextBlock HorizontalAlignment="Center">Html</TextBlock>
                 </StackPanel>
             </Button>
-            <Button BorderBrush="#FFF9F9F9" Width="80" Background="#FFF9F9F9" Name="ButtonPDF" Click="ButtonPDF_Click">
+            <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonPDF" Click="ButtonPDF_Click">
                 <StackPanel>
                     <Image  Source="Images/Button-PDF.ico" Width="40" Height="40"/>
-                    <TextBlock  HorizontalAlignment="Center">Make pdf file</TextBlock>
+                    <TextBlock  HorizontalAlignment="Center">Make pdf</TextBlock>
                 </StackPanel>
             </Button>
             <Grid>

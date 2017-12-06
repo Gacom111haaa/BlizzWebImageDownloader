@@ -209,77 +209,6 @@ namespace WebImageDownloader
                     string string3 = Address;
 
                     Running.IsIndeterminate = true;
-
-                    //if (general_check.IsChecked == true)
-                    //{
-                    //    Task taskCreateList =
-                    //           Task.Factory.StartNew(() =>
-                    //           {
-                    //               GenaralDownload GD = new GenaralDownload(string1, string2, string3);
-                    //               GD.GetImagesLinkFromUrl3();
-
-                    //           }).ContinueWith(ant =>
-                    //           {
-                    //               Running.IsIndeterminate = false;
-                    //               main.AddReturn();
-                    //               this.Close();
-                    //           }, TaskScheduler.FromCurrentSynchronizationContext());
-                    //}
-
-
-                    //else if (Address.IndexOf("urlgalleries") > 0) // urlgalleries
-                    //{
-                    //    Task taskCreateList =
-                    //       Task.Factory.StartNew(() =>
-                    //       {
-                    //           urlgalleriesDownload GD = new urlgalleriesDownload(string1, string2, string3);
-                    //           GD.GetImagesLinkFromUrl2();
-
-                    //       }).ContinueWith(ant =>
-                    //       {
-                    //           Running.IsIndeterminate = false;
-                    //           main.AddReturn();
-                    //           this.Close();
-                    //       }, TaskScheduler.FromCurrentSynchronizationContext());
-                    //}
-
-                    //else if (Address.IndexOf("fuskator.com") > 0) // urlgalleries
-                    //{
-
-                    //    Task taskCreateList =
-                    //       Task.Factory.StartNew(() =>
-                    //       {
-                    //           fuskator GD = new fuskator(string1, string2, string3);
-                    //           GD.GetImagesLinkFromUrl2();
-
-                    //       }).ContinueWith(ant =>
-                    //       {
-                    //           Running.IsIndeterminate = false;
-                    //           main.AddReturn();
-                    //           this.Close();
-                    //       }, TaskScheduler.FromCurrentSynchronizationContext());
-                    //}
-
-                    //else if (Address.IndexOf("imagefap.com") > 0) // urlgalleries
-                    //{
-
-                    //    Task taskCreateList =
-                    //       Task.Factory.StartNew(() =>
-                    //       {
-                    //           imagefap GD = new imagefap(string1, string2, string3);
-                    //           GD.GetImagesLinkFromUrl2();
-
-                    //       }).ContinueWith(ant =>
-                    //       {
-                    //           Running.IsIndeterminate = false;
-                    //           main.AddReturn();
-                    //           this.Close();
-                    //       }, TaskScheduler.FromCurrentSynchronizationContext());
-                    //}
-
-                    //else if (Address.IndexOf("eroticity.net") > 0) // urlgalleries
-                    //{
-
                         Task taskCreateList =
                            Task.Factory.StartNew(() =>
                            {
@@ -312,7 +241,7 @@ namespace WebImageDownloader
         private void btnAddHtml_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Html files (*.html)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Filter = "Html files (*.html)|*.html|All files (*.*)|*.*";
             var dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == true)
             {
