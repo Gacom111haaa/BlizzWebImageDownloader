@@ -8,7 +8,7 @@
             <RowDefinition Height="70*"/>
             <RowDefinition Height="285*"/>
         </Grid.RowDefinitions>
-        <Menu IsMainMenu="True" BorderBrush="Gray" BorderThickness="1">
+        <Menu IsMainMenu="True" Background="White" BorderBrush="Gray" BorderThickness="1">
             <MenuItem Header="Task">
                 <MenuItem Header="Add Link" Click="MenuItem_Click_1" />
                 <MenuItem Header="Download" Click="MenuItem_Click_2" />
@@ -91,7 +91,7 @@
             
         </StackPanel>
 
-        <DataGrid x:Name="DataGridListDownload" ItemsSource="{Binding}" Grid.Row="2" AutoGenerateColumns="False">
+        <DataGrid x:Name="DataGridListDownload" ItemsSource="{Binding}" Grid.Row="2" AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID"  Binding="{Binding ID, Mode=OneTime}"/>
                 <DataGridTextColumn Header="SavePath" Binding="{Binding savepath}" Width="200"/>

@@ -26,3 +26,29 @@ C:\Users\LamPT\Documents\Visual Studio 2010\Projects\WebImageDownloader\WebImage
 C:\Users\LamPT\Documents\Visual Studio 2010\Projects\WebImageDownloader\WebImageDownloader\obj\x86\Release\GenerateResource.read.1.tlog
 C:\Users\LamPT\Documents\Visual Studio 2010\Projects\WebImageDownloader\WebImageDownloader\obj\x86\Release\GenerateResource.write.1.tlog
 C:\Users\LamPT\Documents\Visual Studio 2010\Projects\WebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.exe.licenses
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\WebImageDownloader.exe.config
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.exe
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.pdb
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\WebImageDownloader.exe
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\WebImageDownloader.pdb
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\itextsharp.dll
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\itextsharp.pdfa.dll
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\itextsharp.xtra.dll
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\NSoup.dll
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\bin\Release\itextsharp.xml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\AddItem.baml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\ChapToVol.baml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\Options.baml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\SaveImageFromHtml.baml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\MainWindow.baml
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\AddItem.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\ChapToVol.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\Options.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\SaveImageFromHtml.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\MainWindow.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\App.g.cs
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader_MarkupCompile.cache
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.g.resources
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.Properties.Resources.resources
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.csproj.GenerateResource.Cache
+D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Release\WebImageDownloader.exe.licenses
