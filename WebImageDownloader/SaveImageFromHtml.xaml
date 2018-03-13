@@ -1,13 +1,14 @@
 ﻿<Window x:Class="WebImageDownloader.SaveImageFromHtml"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="SaveImageFromHtml" Height="230" Width="450" Icon="Images/Button-Html.ico">
+        Title="SaveImageFromHtml" Height="336.81" Width="450" Icon="Images/Button-Html.ico">
     <Grid >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="72*" />
-            <ColumnDefinition Width="276*" />
+            <ColumnDefinition Width="13*" />
+            <ColumnDefinition Width="72*"/>
+            <ColumnDefinition Width="275*" />
             <ColumnDefinition Width="12*" />
-            <ColumnDefinition Width="72*" />
+            <ColumnDefinition Width="60*" />
             <ColumnDefinition Width="13*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -16,23 +17,23 @@
             <RowDefinition Height="15*" />
             <RowDefinition Height="26*" />
             <RowDefinition Height="16*" />
-            <RowDefinition Height="26*" />
-            <RowDefinition Height="16*" />
-            <RowDefinition Height="26*" />
-            <RowDefinition Height="13*" />
-            <RowDefinition Height="13*" />
+            <RowDefinition Height="10*" />
             <RowDefinition Height="14*" />
+            <RowDefinition Height="134*" />
         </Grid.RowDefinitions>
-        <Label Content="Save To" Grid.Row="3" Name="label1" VerticalContentAlignment="Center"/>
-        <Label Content="File Name" Grid.Row="5" Name="label2" VerticalContentAlignment="Center"/>
-        <TextBox Grid.Column="1" Grid.Row="3" Name="textBoxSaveTo" VerticalContentAlignment="Center" Text="C:\Users\Admin\Desktop" />
-        <TextBox Grid.Column="1" Grid.Row="5" Name="textBoxFileName" VerticalContentAlignment="Center" Text="Anh" />
-        <Button Content="Start" Grid.Column="3" Grid.Row="3" Name="button1" VerticalContentAlignment="Center" Click="button1_Click" />
-        <Label Content="Size Image" Grid.Row="7"  Name="label3" VerticalContentAlignment="Center" />
-        <TextBox Grid.Column="1" Grid.Row="7" Name="textBoxFileSize" VerticalContentAlignment="Center" Text="500" />
-        <ProgressBar Grid.Row="9" Name="progressBar1" Grid.ColumnSpan="4" Margin="20,0,0,0" />
-        <Label Content="Address" Grid.Row="1" Name="label4" VerticalContentAlignment="Center" />
-        <TextBox Grid.Column="1" Grid.Row="1" Name="textBoxOpen" VerticalContentAlignment="Center"/>
-        <Button Content="Browser" Grid.Column="3" Grid.Row="1" Name="buttonBrowser" Click="buttonBrowser_Click" />
+        <Label Content="Save To" Grid.Row="3" Grid.Column="1" Name="label1" VerticalContentAlignment="Center" />
+        <TextBox Grid.Row="3" Name="textBoxSaveTo" VerticalContentAlignment="Center" Text="C:\Users\Admin\Desktop" Grid.Column="2" />
+        <Button Content="Start" Grid.Column="4" Grid.Row="3" Name="button1" VerticalContentAlignment="Center" Click="button1_Click" />
+        <ProgressBar Grid.Row="5" Name="Running" Grid.ColumnSpan="4" Grid.Column="1" />
+        <Label Content="Address" Grid.Row="1" Grid.Column="1" Name="label4" VerticalContentAlignment="Center" />
+        <TextBox Grid.Column="2" Grid.Row="1" Name="textBoxOpen" VerticalContentAlignment="Center" />
+        <Button Content="Browser" Grid.Column="4" Grid.Row="1" Name="buttonBrowser" Click="buttonBrowser_Click" />
+        <Grid Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="52*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+        </Grid>
     </Grid>
 </Window>

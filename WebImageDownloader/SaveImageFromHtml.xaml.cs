@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,6 +23,14 @@ namespace WebImageDownloader
     /// </summary>
     public partial class SaveImageFromHtml : Window
     {
+        WID main = null;
+
+        public SaveImageFromHtml(WID _main)
+        {
+            main = _main;
+            InitializeComponent();
+        }
+
         public SaveImageFromHtml()
         {
             InitializeComponent();
@@ -35,20 +44,54 @@ namespace WebImageDownloader
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            sourcepath = textBoxOpen.Text;
-            savepath = textBoxSaveTo.Text;
-            savename = textBoxFileName.Text;
-            filesize = Int32.Parse(textBoxFileSize.Text);
-            Thread tr = new Thread(new ThreadStart(Process));
-            tr.Start();
-            this.Dispatcher.Invoke(
-                System.Windows.Threading.DispatcherPriority.Normal,
-                    new Action(
-                        delegate()
-                        {
-                            UpdateProgress(process, all);
-                        }
-                        ));
+            //sourcepath = textBoxOpen.Text;
+            //savepath = textBoxSaveTo.Text;
+            //savename = textBoxFileName.Text;
+            //filesize = Int32.Parse(textBoxFileSize.Text);
+            //Thread tr = new Thread(new ThreadStart(Process));
+            //tr.Start();
+            //this.Dispatcher.Invoke(
+            //    System.Windows.Threading.DispatcherPriority.Normal,
+            //        new Action(
+            //            delegate()
+            //            {
+            //                UpdateProgress(process, all);
+            //            }
+            //            ));
+            Run();
+        }
+
+
+        private void Run()
+        {
+            if (!textBoxOpen.Text.Equals(""))
+            {
+                string Address = textBoxOpen.Text.Trim();
+                //main.AddReturn(URL);
+
+                string string1 = main.SaveLink;
+                string string2 = main.SaveName;
+                string string3 = Address;
+
+                Running.IsIndeterminate = true;
+                Task taskCreateList =
+                   Task.Factory.StartNew(() =>
+                   {
+                       GenaralDownload GD = new GenaralDownload(string1, string2, string3);
+                       GD.GetImagesLinkFromUrl4();
+                       GD.GetImagesLinkFromUrl5();
+                   }).ContinueWith(ant =>
+                   {
+                       Running.IsIndeterminate = false;
+                       main.AddReturn();
+                       this.Close();
+                   }, TaskScheduler.FromCurrentSynchronizationContext());
+                //}
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("Error", "URL is empty");
+            }
         }
 
         private void Process()
@@ -135,12 +178,12 @@ namespace WebImageDownloader
 
         private void buttonBrowser_Click(object sender, RoutedEventArgs e)
         {
-            FolderBrowserDialog fl = new FolderBrowserDialog();
-            fl.SelectedPath = System.IO.Directory.GetCurrentDirectory();
-            fl.ShowNewFolderButton = true;
-            if (fl.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.Filter = "Html files (*.html)|*.html|All files (*.*)|*.*";
+            var dialogResult = openFileDialog.ShowDialog();
+            if (dialogResult == true)
             {
-                textBoxOpen.Text = fl.SelectedPath;
+                textBoxOpen.Text = openFileDialog.FileName;
             }
         }
 
@@ -151,10 +194,11 @@ namespace WebImageDownloader
                 // Calculate the download progress in percentages
                 float PercentProgress = (Process / all) * 100;
                 // Make progress on the progress bar
-                progressBar1.Value = PercentProgress;
+                Running.Value = PercentProgress;
             }
             catch (Exception ex)
             {
+                System.Windows.Forms.MessageBox.Show(ex.ToString());
             }
         }
     }

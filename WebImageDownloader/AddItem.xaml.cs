@@ -30,8 +30,6 @@ namespace WebImageDownloader
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (htmlFile_check.IsChecked == false)
-            {
                 if (!textBox_URL.Text.Equals(""))
                 {
                     string Address = textBox_URL.Text.Trim();
@@ -197,56 +195,6 @@ namespace WebImageDownloader
                     MessageBox.Show("Error", "URL is empty");
                 }
             }
-            else //mean Check Html == true;
-            {
-                if (!textBox_URL.Text.Equals(""))
-                {
-                    string Address = textBox_URL.Text.Trim();
-                    //main.AddReturn(URL);
-
-                    string string1 = main.SaveLink;
-                    string string2 = main.SaveName;
-                    string string3 = Address;
-
-                    Running.IsIndeterminate = true;
-                        Task taskCreateList =
-                           Task.Factory.StartNew(() =>
-                           {
-                               GenaralDownload GD = new GenaralDownload(string1, string2, string3);
-                               GD.GetImagesLinkFromUrl4();
-                               GD.GetImagesLinkFromUrl5();
-                           }).ContinueWith(ant =>
-                           {
-                               Running.IsIndeterminate = false;
-                               main.AddReturn();
-                               this.Close();
-                           }, TaskScheduler.FromCurrentSynchronizationContext());
-                    //}
-                }
-                else
-                {
-                    MessageBox.Show("Error", "URL is empty");
-                }
-            }
         }
-
-        private void htmlFile_check_Checked(object sender, RoutedEventArgs e)
-        {
-            if (htmlFile_check.IsEnabled == true)
-                btnAddHtml.IsEnabled = true;
-            else
-                btnAddHtml.IsEnabled = false;
-        }
-
-        private void btnAddHtml_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Html files (*.html)|*.html|All files (*.*)|*.*";
-            var dialogResult = openFileDialog.ShowDialog();
-            if (dialogResult == true)
-            {
-                textBox_URL.Text = openFileDialog.FileName;
-            }
-        }
-    }
+      
 }

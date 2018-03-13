@@ -245,7 +245,7 @@ namespace WebImageDownloader
 
         private void ButtonHtml_Click(object sender, RoutedEventArgs e)
         {
-            SaveImageFromHtml saveimageForm = new SaveImageFromHtml();
+            SaveImageFromHtml saveimageForm = new SaveImageFromHtml(this);
             saveimageForm.ShowDialog();
         }
 

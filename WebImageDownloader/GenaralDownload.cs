@@ -358,6 +358,14 @@ namespace WebImageDownloader
                 {
                     listtemp.Add(imagelink.Replace("/small/", "/big/"));
                 }
+                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://img.yt/upload/small") >= 0)
+                {
+                    listtemp.Add(imagelink.Replace("http://img.yt/upload/small", "https://x001.img.yt/big"));
+                }
+                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("https://img.yt/upload/small") >= 0)
+                {
+                    listtemp.Add(imagelink.Replace("https://img.yt/upload/small", "https://x001.img.yt/big"));
+                }
             }
             int i = 0;
             foreach (string imagelink in listtemp)

@@ -30,9 +30,9 @@
         <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
             <CheckBox  Name="general_check" IsChecked="False" VerticalAlignment="Center" Content="General Download" ></CheckBox>
             <Grid Width="10"></Grid>
-            <CheckBox Name="htmlFile_check" IsChecked="False" VerticalAlignment="Center" Content="Check From Html File" Checked="htmlFile_check_Checked" ></CheckBox>
+            <!--<CheckBox Name="htmlFile_check" IsChecked="False" VerticalAlignment="Center" Content="Check From Html File" Checked="htmlFile_check_Checked" ></CheckBox>-->
             <Grid Width="10"></Grid>
-            <Button Name="btnAddHtml" Content="..." Width="50" IsEnabled="False" Click="btnAddHtml_Click"></Button>
+            <!--<Button Name="btnAddHtml" Content="..." Width="50" IsEnabled="False" Click="btnAddHtml_Click"></Button>-->
         </StackPanel>
         <ProgressBar Name="Running" Grid.Row="5" Grid.Column="1" Width="400" Height="20" HorizontalAlignment="Left"/>
     </Grid>
