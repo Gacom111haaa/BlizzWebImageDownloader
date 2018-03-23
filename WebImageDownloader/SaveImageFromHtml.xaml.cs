@@ -1,5 +1,8 @@
-﻿using System;
+﻿
+using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +18,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace WebImageDownloader
 {
@@ -24,6 +28,7 @@ namespace WebImageDownloader
     public partial class SaveImageFromHtml : Window
     {
         WID main = null;
+        private List<ItemHtmlSelect> listhtmlFile = new List<ItemHtmlSelect>();
 
         public SaveImageFromHtml(WID _main)
         {
@@ -44,75 +49,60 @@ namespace WebImageDownloader
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            //sourcepath = textBoxOpen.Text;
-            //savepath = textBoxSaveTo.Text;
-            //savename = textBoxFileName.Text;
-            //filesize = Int32.Parse(textBoxFileSize.Text);
-            //Thread tr = new Thread(new ThreadStart(Process));
-            //tr.Start();
-            //this.Dispatcher.Invoke(
-            //    System.Windows.Threading.DispatcherPriority.Normal,
-            //        new Action(
-            //            delegate()
-            //            {
-            //                UpdateProgress(process, all);
-            //            }
-            //            ));
-            Run();
+            foreach(object row in grvHtmlFile.Items)
+            {             
+                string linkSelect = ((ItemHtmlSelect)row).link;
+                if (File.Exists(linkSelect))
+                {
+                    string Feedback = Run(linkSelect);
+                    listhtmlFile.Where(x => x.link == linkSelect).FirstOrDefault().status = Feedback;
+                    grvHtmlFile.DataContext = null;
+                    grvHtmlFile.DataContext = listhtmlFile;
+                }
+                else
+                {
+                    //System.Windows.MessageBox.Show("File not found");
+                    listhtmlFile.Where(x => x.link == linkSelect).FirstOrDefault().status = "File not found";
+                    grvHtmlFile.DataContext = null;
+                    grvHtmlFile.DataContext = listhtmlFile;
+                }
+            }
         }
 
 
-        private void Run()
+        private string Run(string link)
         {
-            if (!textBoxOpen.Text.Equals(""))
-            {
-                string Address = textBoxOpen.Text.Trim();
-                //main.AddReturn(URL);
-
-                string string1 = main.SaveLink;
-                string string2 = main.SaveName;
-                string string3 = Address;
-
-                Running.IsIndeterminate = true;
-                Task taskCreateList =
-                   Task.Factory.StartNew(() =>
-                   {
-                       GenaralDownload GD = new GenaralDownload(string1, string2, string3);
-                       GD.GetImagesLinkFromUrl4();
-                       GD.GetImagesLinkFromUrl5();
-                   }).ContinueWith(ant =>
-                   {
-                       Running.IsIndeterminate = false;
-                       main.AddReturn();
-                       this.Close();
-                   }, TaskScheduler.FromCurrentSynchronizationContext());
-                //}
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("Error", "URL is empty");
-            }
+            string string1 = main.SaveLink;
+            string string2 = main.SaveName;
+            string string3 = link;
+            GenaralDownload GD = new GenaralDownload(string1, string2, string3);
+            string CheckString = GD.GetImagesLinkFromUrl5();
+            main.AddReturn();
+            return CheckString;
         }
 
+        /// <summary>
+        /// Hàm biểu thức chính quy, không cần sử dụng itextsharpt
+        /// </summary>
         private void Process()
         {
             if (sourcepath == "")
             {
-                sourcepath = System.IO.Directory.GetCurrentDirectory();
+                sourcepath = Directory.GetCurrentDirectory();
             }
 
             //bien cho processbar
 
             //lay tat ca cac file htm trong thu muc
             string source = sourcepath;
-            string[] all_files1 = System.IO.Directory.GetFiles(source, "*.htm");
-            string[] all_files2 = System.IO.Directory.GetFiles(source, "*.php");
+            string[] all_files1 = Directory.GetFiles(source, "*.htm");
+            string[] all_files2 = Directory.GetFiles(source, "*.php");
             //string[] all_files3 = System.IO.Directory.GetFileSystemEntries(source, "*.html");
 
             //ghep 3 mang lam mot
             string[] all_files = new string[all_files1.Length + all_files2.Length];
             int count1 = all_files1.Length;
-            int count2 = all_files2.Length;
+            //int count2 = all_files2.Length;
 
             for (int i = 0; i < all_files1.Length; i++)
             {
@@ -131,10 +121,10 @@ namespace WebImageDownloader
                 string createsource = file.Substring(0, file.LastIndexOf("."));//tru di 4 ki tu .htm
                 createsource = createsource.Substring(createsource.LastIndexOf("\\") + 1);//lay phan cuoi cung trong file lam ten thu muc
                 string createpath = savepath + "\\" + createsource; ;//ghep ten thu muc va duong dan moi de tao thu muc moi
-                System.IO.Directory.CreateDirectory(createpath);
+                Directory.CreateDirectory(createpath);
 
                 string htmlURL = file;
-                string htmString = System.IO.File.ReadAllText(@htmlURL);
+                string htmString = File.ReadAllText(@htmlURL);
 
                 //lay ve cac tag img trong html string
                 string pattern = @"<(img)\b[^>]*>";
@@ -178,28 +168,104 @@ namespace WebImageDownloader
 
         private void buttonBrowser_Click(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
-            openFileDialog.Filter = "Html files (*.html)|*.html|All files (*.*)|*.*";
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog() { Filter = "Html files (*.html)|*.html|All files (*.*)|*.*", Multiselect = true };
             var dialogResult = openFileDialog.ShowDialog();
             if (dialogResult == true)
             {
-                textBoxOpen.Text = openFileDialog.FileName;
+                listhtmlFile.Clear();
+                grvHtmlFile.DataContext = null;
+                foreach (string file in openFileDialog.FileNames)
+                {
+                    ItemHtmlSelect item = new ItemHtmlSelect(file, "Uncheck");
+                    listhtmlFile.Add(item);
+                }
+                grvHtmlFile.DataContext = listhtmlFile;
             }
         }
 
-        private void UpdateProgress(int Process, int all)
+        private void btnMove_Click(object sender, RoutedEventArgs e)
         {
-            try
+            int select = grvHtmlFile.SelectedIndex;
+            string linkSelect = ((ItemHtmlSelect)grvHtmlFile.SelectedItem).link;
+
+            if (File.Exists(linkSelect))
             {
-                // Calculate the download progress in percentages
-                float PercentProgress = (Process / all) * 100;
-                // Make progress on the progress bar
-                Running.Value = PercentProgress;
+                string path1 = linkSelect.Substring(0, linkSelect.LastIndexOf("\\"));
+                string path2 = linkSelect.Substring(linkSelect.LastIndexOf("\\") +1);
+                string newpath = string.Format("{0}\\Check\\{1}",path1 ,path2 );
+                if(!Directory.Exists(path1 + "\\Check"))
+                {
+                    Directory.CreateDirectory(path1 + "\\Check");
+                }
+                File.Move(linkSelect, newpath);
+                listhtmlFile[select].status = "Moved";
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
             }
-            catch (Exception ex)
+            else
             {
-                System.Windows.Forms.MessageBox.Show(ex.ToString());
+                //System.Windows.MessageBox.Show("File not found");
+                listhtmlFile[select].status = "File not found";
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
             }
         }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int select = grvHtmlFile.SelectedIndex;
+            string linkSelect = ((ItemHtmlSelect)grvHtmlFile.SelectedItem).link;
+
+            if(File.Exists(linkSelect))
+            {
+                FileSystem.DeleteFile(linkSelect, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+                listhtmlFile[select].status = "Deleted";
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
+            }
+            else
+            {
+                //System.Windows.MessageBox.Show("File not found");
+                listhtmlFile[select].status = "File not found";
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
+            }
+        }
+
+        private void btnRun_Click(object sender, RoutedEventArgs e)
+        {
+
+            int select = grvHtmlFile.SelectedIndex;
+            string linkSelect = ((ItemHtmlSelect) grvHtmlFile.SelectedItem).link;
+            if (File.Exists(linkSelect))
+            {
+                string Feedback = Run(linkSelect);
+                listhtmlFile[select].status = Feedback;
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
+            }
+            else
+            {
+                //System.Windows.MessageBox.Show("File not found");
+                listhtmlFile[select].status = "File not found";
+                grvHtmlFile.DataContext = null;
+                grvHtmlFile.DataContext = listhtmlFile;
+            }
+        }
+
+        //private void UpdateProgress(int Process, int all)
+        //{
+        //    try
+        //    {
+        //        // Calculate the download progress in percentages
+        //        float PercentProgress = (Process / all) * 100;
+        //        // Make progress on the progress bar
+        //        Running.Value = PercentProgress;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        System.Windows.Forms.MessageBox.Show(ex.ToString());
+        //    }
+        //}
     }
 }

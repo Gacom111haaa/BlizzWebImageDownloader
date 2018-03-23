@@ -1,7 +1,11 @@
 ﻿<Window x:Class="WebImageDownloader.WID"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:WebImageDownloader"
         Title="WID" Height="428.063" Width="761.265" Icon="images/main_icon.ico">
+    <Window.Resources>
+        <local:IntToColorConverter x:Key="IntToColorConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="23*"/>
@@ -92,6 +96,12 @@
         </StackPanel>
 
         <DataGrid x:Name="DataGridListDownload" ItemsSource="{Binding}" Grid.Row="2" AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="BorderBrush" Value="Gray"></Setter>
+                    <Setter Property="BorderThickness" Value="0"></Setter>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID"  Binding="{Binding ID, Mode=OneTime}"/>
                 <DataGridTextColumn Header="SavePath" Binding="{Binding savepath}" Width="200"/>
@@ -99,11 +109,13 @@
                 <DataGridTemplateColumn Header="Percentage" Width="120" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ProgressBar Value="{Binding percentage}" Height="21" VerticalAlignment="Center" />
+                            <!--<ProgressBar Value="{Binding percentage}" Height="21" VerticalAlignment="Center" />-->
+                            <Rectangle Height="18" Width="20" Fill="{Binding Path=percentage,Converter={StaticResource IntToColorConverter}}"></Rectangle>
+                            <!--<Rectangle Height="18" Width="20" Fill="Red"></Rectangle>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Status" Width="120" Binding="{Binding status, Mode=OneTime}"/>
+                <DataGridTextColumn Header="Status" Width="120" Binding="{Binding status, Mode=OneTime}" />
             </DataGrid.Columns>
 
             <DataGrid.ContextMenu>

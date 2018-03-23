@@ -82,6 +82,7 @@
     <Reference Include="itextsharp.xtra">
       <HintPath>.\itextsharp.xtra.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="NSoup">
       <HintPath>.\NSoup.dll</HintPath>
     </Reference>
@@ -114,6 +115,8 @@
     <Compile Include="eroticity.cs" />
     <Compile Include="imagefap.cs" />
     <Compile Include="fuskator.cs" />
+    <Compile Include="IntToColorConverter.cs" />
+    <Compile Include="ItemHtmlSelect.cs" />
     <Compile Include="Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
     </Compile>

@@ -20,10 +20,11 @@ using System.Windows.Threading;
 
 namespace WebImageDownloader
 {
-    /// <summary>
-    /// Interaction logic for WID.xaml
-    /// </summary>
-    public partial class WID : Window
+        /// <summary>
+        /// Interaction logic for WID.xaml
+        /// </summary>
+        /// 
+        public partial class WID : Window
     {
         #region Variable
         private Task taskMainDown;
@@ -66,7 +67,7 @@ namespace WebImageDownloader
                     //lets save image to disk                      
                     image.Save(_ItemDown.savepath);
                     _ItemDown.status = "Completed";
-                    _ItemDown.percentage = 100;
+                    _ItemDown.percentage = 1;
                     DataGridListDownload.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate
                         {
                             DataGridListDownload.DataContext = null;
@@ -77,11 +78,11 @@ namespace WebImageDownloader
 
             catch (Exception _ex)
             {
-                _ItemDown.status = "Error: " + _ex.ToString();
+                _ItemDown.percentage = 2;
+                _ItemDown.status = "Error";// + _ex.ToString();
             }
         }
 
-        //can xem lai, trong truong hop clink ko lien nhau thi sao
         private void Delete()
         {
             if (!isRunning)
@@ -182,23 +183,22 @@ namespace WebImageDownloader
             //Task.Factory.StartNew(() =>
             //{
             DataGridListDownload.DataContext = null;
-                StreamReader sr = new StreamReader("data.txt");
-                        string input = null;
-                        while ((input = sr.ReadLine()) != null)
-                        {
-                            string[] itemSplit = input.Split('#');
-                            ItemDown item = new ItemDown(int.Parse(itemSplit[0]), itemSplit[1], itemSplit[2], int.Parse(itemSplit[3]), itemSplit[4]);
-                            if (!"".Equals(item.linkdown))
-
-                                MainQueueItemDownload.Add(item);
-                                //MainQueueDownload.Enqueue(item);
-                        }
-                        sr.Close();
-                   // }).ContinueWith(ant =>
-                    //{
-                        DataGridListDownload.DataContext = MainQueueItemDownload;// MainListItemsDownload;
-                        ButtonAdd.IsEnabled = true;
-                    //}, TaskScheduler.FromCurrentSynchronizationContext());
+            StreamReader sr = new StreamReader("data.txt");
+            string input = null;
+            while ((input = sr.ReadLine()) != null)
+            {
+                string[] itemSplit = input.Split('#');
+                ItemDown item = new ItemDown(int.Parse(itemSplit[0]), itemSplit[1], itemSplit[2], int.Parse(itemSplit[3]), itemSplit[4]);
+                if (!"".Equals(item.linkdown))
+                    MainQueueItemDownload.Add(item);
+                //MainQueueDownload.Enqueue(item);
+            }
+            sr.Close();
+            // }).ContinueWith(ant =>
+            //{
+            DataGridListDownload.DataContext = MainQueueItemDownload;// MainListItemsDownload;
+            ButtonAdd.IsEnabled = true;
+            //}, TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         #endregion
@@ -246,7 +246,7 @@ namespace WebImageDownloader
         private void ButtonHtml_Click(object sender, RoutedEventArgs e)
         {
             SaveImageFromHtml saveimageForm = new SaveImageFromHtml(this);
-            saveimageForm.ShowDialog();
+            saveimageForm.Show();
         }
 
         private void ButtonPDF_Click(object sender, RoutedEventArgs e)

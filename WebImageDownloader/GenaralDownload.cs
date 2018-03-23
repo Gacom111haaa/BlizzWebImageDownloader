@@ -8,11 +8,13 @@ using System.Text;
 using NSoup;
 using NSoup.Nodes;
 using NSoup.Select;
+using System.Xml.Linq;
 
 namespace WebImageDownloader
 {
     class GenaralDownload
     {
+        private List<filterOb> listFilters = new List<filterOb>();
         public string savepath { set; get; }
         public string savename { set; get; }
         public string url { set; get; }
@@ -45,7 +47,7 @@ namespace WebImageDownloader
                 }
                 else foldername = _url.Substring(_url.LastIndexOf("/") + 1);
 
-                return foldername;
+                return foldername.Replace(".html","");
             }
             else return null;
         }
@@ -258,8 +260,8 @@ namespace WebImageDownloader
 
             string foldername = url.Substring(url.LastIndexOf("\\") + 1);
 
-            targetfolder = savepath + "\\" + foldername; ;
-            System.IO.Directory.CreateDirectory(targetfolder);
+            targetfolder = string.Format("{0}\\{1}", savepath, foldername); ;
+            Directory.CreateDirectory(targetfolder);
 
             //lay link galery tu link chung 
             List<string> listtemp = new List<string>();
@@ -284,10 +286,10 @@ namespace WebImageDownloader
 
                     string savename = "";
                     if (i < 10)
-                        directory = targetfolder + "\\" + savename + "00" + i + ".jpg";
+                        directory = string.Format("{0}\\{1}00{2}.jpg", targetfolder, savename, i);
                     else if (i >= 10 && i < 100)
-                        directory = targetfolder + "\\" + savename + "0" + i + ".jpg";
-                    else directory = targetfolder + "\\" + savename + i + ".jpg";
+                        directory = string.Format("{0}\\{1}0{2}.jpg", targetfolder, savename, i);
+                    else directory = string.Format("{0}\\{1}{2}.jpg", targetfolder, savename, i);
                     sw.WriteLine(i + "#" + directory + "#" + imagelink + "#" + 0 + "#waiting");
                     i++;
                 }
@@ -298,7 +300,7 @@ namespace WebImageDownloader
             sw.Close();
         }
 
-        public void GetImagesLinkFromUrl5()
+        public string GetImagesLinkFromUrl5()
         {
             //List<ItemDown> listDown = new List<ItemDown>();
             StreamWriter sw = new StreamWriter("data.txt", false);
@@ -309,8 +311,8 @@ namespace WebImageDownloader
 
             string foldername = url.Substring(url.LastIndexOf("\\") + 1);
 
-            targetfolder = savepath + "\\" + foldername; ;
-            System.IO.Directory.CreateDirectory(targetfolder);
+            targetfolder = string.Format("{0}\\{1}", savepath, foldername); ;
+            
 
             //lay link galery tu link chung 
             List<string> listtemp = new List<string>();
@@ -322,49 +324,22 @@ namespace WebImageDownloader
             foreach (Element link in Links)
             {
                 string imagelink = link.Attr("src");
-                if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://imgmaid.net/t/") >= 0)
+                if (imagelink == "")
+                    imagelink = link.Attr("href");
+                else
                 {
-                    listtemp.Add(imagelink.Replace("http://imgmaid.net/t/", "http://imgmaid.net/i/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://t2.imgchili.com") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://t2.imgchili.com", "http://i2.imgchili.net/")); 
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://fireimg.cc/upload/small") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://fireimg.cc/upload/small", "http://i.fireimg.cc/big"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://t10.imgchili.net/") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://t10.imgchili.net/", "http://i10.imgchili.net/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://coreimg.net/t") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://coreimg.net/t", "http://coreimg.net/i"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("https://t1.pixhost.org/thumbs/") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("https://t1.pixhost.org/thumbs/", "https://img1.pixhost.org/images/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://fapat.me/upload/small/") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://fapat.me/upload/small/", "http://fapat.me/upload/big/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://imgcherry.org/upload/small/") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://imgcherry.org/upload/small/", "http://imgcherry.org/upload/big/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://imgsen.se/upload/small/") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("/small/", "/big/"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("http://img.yt/upload/small") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("http://img.yt/upload/small", "https://x001.img.yt/big"));
-                }
-                else if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf("https://img.yt/upload/small") >= 0)
-                {
-                    listtemp.Add(imagelink.Replace("https://img.yt/upload/small", "https://x001.img.yt/big"));
+                    XElement xDoc = XElement.Load("Filter.xml");
+                    listFilters = (from q in xDoc.Elements("Filter")
+                                   select new filterOb(q.Element("Link").Value, q.Element("Source").Value, q.Element("Target").Value)
+                                    ).ToList();
+                    foreach(filterOb filter in listFilters)
+                    {
+                        if (!(imagelink == "") && !(imagelink == "/") && imagelink.IndexOf(filter.link) >= 0)
+                        {
+                            listtemp.Add(imagelink.Replace(filter.source, filter.target));
+                        }
+                    } 
+
                 }
             }
             int i = 0;
@@ -372,13 +347,12 @@ namespace WebImageDownloader
             {
                 try
                 {
-
-                    string savename = "";
+                    //string savename = foldername;
                     if (i < 10)
-                        directory = targetfolder + "\\" + savename + "00" + i + ".jpg";
+                        directory = string.Format("{0}\\{1}_00{2}.jpg", targetfolder, foldername, i);
                     else if (i >= 10 && i < 100)
-                        directory = targetfolder + "\\" + savename + "0" + i + ".jpg";
-                    else directory = targetfolder + "\\" + savename + i + ".jpg";
+                        directory = string.Format("{0}\\{1}_0{2}.jpg", targetfolder, foldername, i);
+                    else directory = string.Format("{0}\\{1}_{2}.jpg", targetfolder, foldername, i);
                     sw.WriteLine(i + "#" + directory + "#" + imagelink + "#" + 0 + "#waiting");
                     i++;
                 }
@@ -387,6 +361,13 @@ namespace WebImageDownloader
                 }
             }
             sw.Close();
+            if (listtemp.Count > 0)
+            {
+                Directory.CreateDirectory(targetfolder);
+                return "Done";
+            }
+                
+            else return "Fail";
         }
 
     }
