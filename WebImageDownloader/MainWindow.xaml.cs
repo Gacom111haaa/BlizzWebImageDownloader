@@ -313,8 +313,37 @@ namespace WebImageDownloader
             Clear();
         }
 
+
         #endregion
 
+        private void tbxSearch_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (tbxSearch.Text != "")
+            {
+                string strSearch = tbxSearch.Text;
+                var data = MainQueueItemDownload.Where(x => x.linkdown.IndexOf(strSearch) >= 0 || x.savepath.IndexOf(strSearch) >= 0).ToList();
+                DataGridListDownload.DataContext = null;
+                DataGridListDownload.DataContext = data;
+            }
+            else
+            {
+                DataGridListDownload.DataContext = null;
+                DataGridListDownload.DataContext = MainQueueItemDownload;
+            }
+        }
 
+
+        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //int select = DataGridListDownload.SelectedIndex;
+                string linkSelect = ((ItemDown)DataGridListDownload.SelectedItem).linkdown;
+                System.Diagnostics.Process.Start(linkSelect);
+            }catch(Exception _ex)
+            {
+                MessageBox.Show(_ex.ToString());
+            }
+        }
     }
 }

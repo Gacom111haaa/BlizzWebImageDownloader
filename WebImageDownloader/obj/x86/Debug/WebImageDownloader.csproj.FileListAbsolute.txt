@@ -212,6 +212,5 @@ D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImage
 D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImageDownloader.Properties.Resources.resources
 D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImageDownloader.csproj.GenerateResource.Cache
 D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImageDownloader.exe.licenses
-D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImageDownloader.csprojResolveAssemblyReference.cache
 D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
 D:\WORK\GitHub\BlizzWebImageDownloader\WebImageDownloader\obj\x86\Debug\WebImageDownloader_MarkupCompile.lref

@@ -56,16 +56,26 @@ namespace WebImageDownloader
                 {
                     string Feedback = Run(linkSelect);
                     listhtmlFile.Where(x => x.link == linkSelect).FirstOrDefault().status = Feedback;
-                    grvHtmlFile.DataContext = null;
-                    grvHtmlFile.DataContext = listhtmlFile;
+                    grvHtmlFile.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate
+                    {
+                        grvHtmlFile.DataContext = null;
+                        grvHtmlFile.DataContext = listhtmlFile;
+                    }));
                 }
                 else
                 {
                     //System.Windows.MessageBox.Show("File not found");
                     listhtmlFile.Where(x => x.link == linkSelect).FirstOrDefault().status = "File not found";
-                    grvHtmlFile.DataContext = null;
-                    grvHtmlFile.DataContext = listhtmlFile;
+                    grvHtmlFile.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate
+                    {
+                        grvHtmlFile.DataContext = null;
+                        grvHtmlFile.DataContext = listhtmlFile;
+                    }));
                 }
+                pgbRunning.Dispatcher.Invoke(DispatcherPriority.Background, new Action(delegate
+                {
+                    pgbRunning.Value++;
+                }));
             }
         }
 
@@ -179,6 +189,10 @@ namespace WebImageDownloader
                     ItemHtmlSelect item = new ItemHtmlSelect(file, "Uncheck");
                     listhtmlFile.Add(item);
                 }
+
+                pgbRunning.Maximum = openFileDialog.FileNames.Length;
+                pgbRunning.Minimum = 0;
+                
                 grvHtmlFile.DataContext = listhtmlFile;
             }
         }
@@ -234,7 +248,6 @@ namespace WebImageDownloader
 
         private void btnRun_Click(object sender, RoutedEventArgs e)
         {
-
             int select = grvHtmlFile.SelectedIndex;
             string linkSelect = ((ItemHtmlSelect) grvHtmlFile.SelectedItem).link;
             if (File.Exists(linkSelect))

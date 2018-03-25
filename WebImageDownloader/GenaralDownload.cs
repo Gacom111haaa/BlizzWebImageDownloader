@@ -310,6 +310,7 @@ namespace WebImageDownloader
             string directory;
 
             string foldername = url.Substring(url.LastIndexOf("\\") + 1);
+            if (foldername.IndexOf(".html") > 0) foldername = foldername.Replace(".html", "");
 
             targetfolder = string.Format("{0}\\{1}", savepath, foldername); ;
             

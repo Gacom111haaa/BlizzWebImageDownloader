@@ -2,15 +2,16 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WebImageDownloader"
-        Title="WID" Height="428.063" Width="761.265" Icon="images/main_icon.ico">
+        Title="WID" Height="500" Width="800" Icon="images/main_icon.ico">
     <Window.Resources>
         <local:IntToColorConverter x:Key="IntToColorConverter"/>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="23*"/>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="285*"/>
+            <RowDefinition Height="29*"/>
+            <RowDefinition Height="87*"/>
+            <RowDefinition Height="25*"/>
+            <RowDefinition Height="329*"/>
         </Grid.RowDefinitions>
         <Menu IsMainMenu="True" Background="White" BorderBrush="Gray" BorderThickness="1">
             <MenuItem Header="Task">
@@ -27,7 +28,7 @@
             </MenuItem>
             <MenuItem Header="Config" Click="MenuItem_Click_6" />
             <MenuItem Header="About"/>
-        </Menu>     
+        </Menu>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Background="#FFF9F9F9">
             <Button BorderBrush="#FFF9F9F9" Width="60" Background="#FFF9F9F9" Name="ButtonAdd" Click="ButtonAdd_Click">
                 <StackPanel>
@@ -92,16 +93,16 @@
                 <Border Background="#FFF9F9F9"/>
                 <MediaElement x:Name="myGif" LoadedBehavior="Manual"  Source="Images/LoadingCircle_finalani.gif" Width="40" Height="40" MediaEnded="myGif_MediaEnded"/>
             </Grid>
-            
-        </StackPanel>
 
-        <DataGrid x:Name="DataGridListDownload" ItemsSource="{Binding}" Grid.Row="2" AutoGenerateColumns="False" BorderBrush="Gray" BorderThickness="1">
-            <DataGrid.CellStyle>
-                <Style TargetType="DataGridCell">
-                    <Setter Property="BorderBrush" Value="Gray"></Setter>
-                    <Setter Property="BorderThickness" Value="0"></Setter>
-                </Style>
-            </DataGrid.CellStyle>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                    Grid.Row="2" Background="#FFF9F9F9">
+                <Label Content="Search"></Label>
+                <TextBox Name="tbxSearch" Width="150" TextChanged="tbxSearch_TextChanged"></TextBox>
+                <Grid Width="10"></Grid>
+            </StackPanel>
+        <DataGrid x:Name="DataGridListDownload" ItemsSource="{Binding}" AutoGenerateColumns="False" BorderBrush="Gray" 
+                  GridLinesVisibility="None" BorderThickness="1" Grid.Row="4">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID"  Binding="{Binding ID, Mode=OneTime}"/>
                 <DataGridTextColumn Header="SavePath" Binding="{Binding savepath}" Width="200"/>
@@ -120,12 +121,11 @@
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Add"/>
+                    <MenuItem Header="Open" Click="MenuItemOpen_Click"/>
                     <MenuItem Header="Delete" Click="MenuItem_Click" />
                     <MenuItem Header="Redownload"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
-
     </Grid>
 </Window>

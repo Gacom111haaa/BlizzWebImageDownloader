@@ -24,7 +24,7 @@
         <Label Content="Save To" Grid.Row="3" Grid.Column="1" Name="label1" VerticalContentAlignment="Center" HorizontalAlignment="Right" />
         <TextBox Grid.Row="3" Name="textBoxSaveTo" Height="23" Text="C:\Users\Admin\Desktop" Grid.Column="2" />
         <Button Content="Start" Grid.Column="4" Grid.Row="3" Name="button1" VerticalContentAlignment="Center" Click="button1_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="23" />
-        <ProgressBar Grid.Row="5" Name="Running" Grid.ColumnSpan="4" Grid.Column="1" />
+        <ProgressBar Grid.Row="5" Name="pgbRunning" Grid.ColumnSpan="4" Grid.Column="1" />
         <Label Content="Address" Grid.Row="1" Grid.Column="1" Name="label4" VerticalContentAlignment="Center" HorizontalAlignment="Right" />
         <TextBox Grid.Column="2" Grid.Row="1" Name="textBoxOpen" Height="23" />
         <Button Content="Browser" Grid.Column="4" Grid.Row="1" Name="buttonBrowser" Click="buttonBrowser_Click" HorizontalAlignment="Center" VerticalAlignment="Center" Width="80" Height="23" />
